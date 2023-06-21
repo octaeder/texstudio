@@ -9483,7 +9483,8 @@ void Texstudio::showPreview(const QDocumentCursor &previewc, bool addToList)
 	QString atBeginDocument = "\n";
 	QString atEndDocument = "\n";
 	BuildManager::Dvi2PngMode dvi2pngModeDerived = buildManager.guessDvi2PngMode();
-	if (dvi2pngModeDerived>=BuildManager::DPM_EMBEDDED_PDF && configManager.previewMode != ConfigManager::PM_EMBEDDED) {
+	if (dvi2pngModeDerived>=BuildManager::DPM_EMBEDDED_PDF && configManager.previewMode != ConfigManager::PM_EMBEDDED
+		&& configManager.previewMode != ConfigManager::PM_PANEL) {
 		header << "\\usepackage[active,tightpage]{preview}"
 			<< "\\usepackage{varwidth}";
 		atBeginDocument = "\n\\begin{preview}\\begin{varwidth}{\\linewidth}\n";
