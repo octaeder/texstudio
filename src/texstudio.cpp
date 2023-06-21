@@ -9088,7 +9088,7 @@ QStringList Texstudio::makePreviewHeader(const LatexDocument *rootDoc)
 		}
 	}
 	if ((buildManager.dvi2pngMode == BuildManager::DPM_EMBEDDED_PDF || buildManager.dvi2pngMode == BuildManager::DPM_LUA_EMBEDDED_PDF || buildManager.dvi2pngMode == BuildManager::DPM_XE_EMBEDDED_PDF)
-			&& configManager.previewMode != ConfigManager::PM_EMBEDDED) {
+			&& configManager.previewMode != ConfigManager::PM_EMBEDDED && configManager.previewMode != ConfigManager::PM_PANEL) {
 		header << "\\usepackage[active,tightpage]{preview}"
 			<< "\\usepackage{varwidth}"
 			<< "\\AtBeginDocument{\\begin{preview}\\begin{varwidth}{\\linewidth}}"
