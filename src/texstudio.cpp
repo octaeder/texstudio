@@ -69,6 +69,7 @@
 #include "symbollistmodel.h"
 #include "symbolwidget.h"
 #include "execprogram.h"
+#include <QTime>
 
 #include <QScreen>
 
@@ -6525,7 +6526,8 @@ void Texstudio::processNotification(const QString &message)
 {
 	if (message.startsWith(tr("Error:")))
 		outputView->showPage(outputView->MESSAGES_PAGE);
-	outputView->insertMessageLine(message + "\n");
+	QString timeInfo = QTime::currentTime().toString("hh:mm:ss");
+	outputView->insertMessageLine(timeInfo + " " + message + "\n");
 }
 /*!
  * \brief clear log view in panel
