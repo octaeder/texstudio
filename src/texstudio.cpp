@@ -327,10 +327,21 @@ Texstudio::Texstudio(QWidget *parent, Qt::WindowFlags flags, QSplashScreen *spla
 	sidePanelSplitter = new MiniSplitter(Qt::Horizontal, this);
 	sidePanelSplitter->addWidget(centralVSplitter);
 
-	mainHSplitter = new MiniSplitter(Qt::Horizontal, this);  // top-level element: splits: [ everything else | PDF ]
-	mainHSplitter->addWidget(sidePanelSplitter);
-	mainHSplitter->setChildrenCollapsible(false);
-	setCentralWidget(mainHSplitter);
+	Qt::Orientation orientation;
+	switch(configManager.pdfDocumentConfig->viewerLocation) {
+		case PDFviewerTop:
+		case PDFviewerBottom: orientation = Qt::Vertical;
+			break;
+		case PDFviewerLeft:
+		case PDFviewerRight: orientation = Qt::Horizontal;
+			break;
+		default: orientation = Qt::Horizontal;
+	}
+	mainHorVerSplitter = new MiniSplitter(orientation, this);  // top-level element: splits: [ everything else | PDF ]
+
+	mainHorVerSplitter->addWidget(sidePanelSplitter);
+	mainHorVerSplitter->setChildrenCollapsible(false);
+	setCentralWidget(mainHorVerSplitter);
 
 	setContextMenuPolicy(Qt::ActionsContextMenu);
 
@@ -1839,7 +1850,7 @@ void Texstudio::updateCaption()
 		updateOpenDocumentMenu(true);
 		newDocumentLineEnding();
 	}
-	setWindowTitle(title);
+	setWindowTitle(title + QString(" [_pdfViewer] %1").arg(TEXSTUDIO_GIT_REVISION ? TEXSTUDIO_GIT_REVISION : "n/a"));
 	updateUndoRedoStatus();
 	cursorPositionChanged();
 	if (documents.singleMode()) {
@@ -4543,7 +4554,7 @@ void Texstudio::saveSettings(const QString &configName)
 	if (!PDFDocument::documentList().isEmpty()) {
         PDFDocument *doc = PDFDocument::documentList().constFirst();
 		if (doc->embeddedMode) {
-			QList<int> sz = mainHSplitter->sizes(); // set widths to 50%, eventually restore user setting
+			QList<int> sz = mainHorVerSplitter->sizes(); // set widths to 50%, eventually restore user setting
 			int sum = 0;
 			int last = 0;
 			foreach (int i, sz) {
@@ -7531,7 +7542,7 @@ void Texstudio::pdfClosed()
 	if (from) {
 		if (from->embeddedMode) {
 			shrinkEmbeddedPDFViewer(true);
-			QList<int> sz = mainHSplitter->sizes(); // set widths to 50%, eventually restore user setting
+			QList<int> sz = mainHorVerSplitter->sizes(); // set widths to 50%, eventually restore user setting
 			int sum = 0;
 			int last = 0;
 			foreach (int i, sz) {
@@ -7553,8 +7564,19 @@ QObject *Texstudio::newPdfPreviewer(bool embedded)
 	PDFDocument *pdfviewerWindow = new PDFDocument(configManager.pdfDocumentConfig, embedded);
     pdfviewerWindow->setToolbarIconSize(pdfviewerWindow->embeddedMode ? configManager.guiPDFToolbarIconSize : configManager.guiToolbarIconSize);
 	if (embedded) {
-		mainHSplitter->addWidget(pdfviewerWindow);
-		QList<int> sz = mainHSplitter->sizes(); // set widths to 50%, eventually restore user setting
+		int index;
+		switch(configManager.pdfDocumentConfig->viewerLocation) {
+			case PDFviewerTop:
+			case PDFviewerLeft: index = 0;
+				break;
+			case PDFviewerBottom:
+			case PDFviewerRight: index = 1;
+				break;
+			default: index = 1;
+		}
+		mainHorVerSplitter->insertWidget(index,pdfviewerWindow);
+
+		QList<int> sz = mainHorVerSplitter->sizes(); // set widths to 50%, eventually restore user setting
 		int sum = 0;
 		foreach (int i, sz) {
 			sum += i;
@@ -7564,7 +7586,7 @@ QObject *Texstudio::newPdfPreviewer(bool embedded)
 			pdfSplitterRel = 0.5;
 		sz << sum - qRound(pdfSplitterRel * sum);
 		sz << qRound(pdfSplitterRel * sum);
-		mainHSplitter->setSizes(sz);
+		mainHorVerSplitter->setSizes(sz);
 	}
 	connect(pdfviewerWindow, SIGNAL(triggeredAbout()), SLOT(helpAbout()));
 	connect(pdfviewerWindow, SIGNAL(triggeredEnlarge()), SLOT(enlargeEmbeddedPDFViewer()));

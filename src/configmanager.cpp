@@ -10,6 +10,7 @@
 #include "webpublishdialog_config.h"
 #include "insertgraphics_config.h"
 #include "grammarcheck_config.h"
+#include "PDFDocument.h"
 #include "PDFDocument_config.h"
 #include "terminal_config.h"
 #include "encoding.h"
@@ -772,6 +773,7 @@ ConfigManager::ConfigManager(QObject *parent): QObject (parent),
 	registerOption("Preview/Sync File Mask", &pdfDocumentConfig->syncFileMask, "*.tex;*.tikz;*.pdf_tex;*.ctx", &pseudoDialog->lineEditPreviewSyncFileMask);
 	registerOption("Preview/AutoHideToolbars", &pdfDocumentConfig->autoHideToolbars, false, &pseudoDialog->autoHideToolbars);
 	registerOption("Preview/Auto Full Recompile", &editorConfig->fullCompilePreview, false, &pseudoDialog->autoRecompileFullDocument);
+	registerOption("Preview/ViewerLocation", &pdfDocumentConfig->viewerLocation, PDFviewerRight, &pseudoDialog->comboBoxViewerLocation);
 
 	registerOption("Preview/EnlargedEmbedded", &viewerEnlarged, false);
 

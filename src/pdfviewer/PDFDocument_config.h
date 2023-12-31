@@ -37,6 +37,7 @@ struct PDFDocumentConfig {
 	QString paperColor; // hex rgb
 	QString highlightColor; // hex rgba, e.g. #FFFF003F
 	int highlightDuration;
+	int viewerLocation;
 
 //live options
 	int editTool;

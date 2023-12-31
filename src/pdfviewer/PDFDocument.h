@@ -166,6 +166,13 @@ typedef enum {
 	kFitTextWidth
 } autoScaleOption;
 
+enum PDFviewerLocation {
+	PDFviewerLeft,
+	PDFviewerRight,
+	PDFviewerTop,
+	PDFviewerBottom
+};
+
 struct PDFPageHistoryItem{
 	int page;
     double x, y;

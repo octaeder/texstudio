@@ -4163,7 +4163,7 @@ them here.</string>
                   <string>Internal PDF Viewer</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_4">
-                  <item row="3" column="1">
+                  <item row="4" column="1">
                    <widget class="QSpinBox" name="spinBoxPreviewScale">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -4185,7 +4185,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="3" column="0">
+                  <item row="4" column="0">
                    <widget class="QLabel" name="label_29">
                     <property name="text">
                      <string>Scaling:</string>
@@ -4219,7 +4219,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="6" column="1">
+                  <item row="7" column="1">
                    <widget class="QSpinBox" name="spinBoxPreviewMagnifierSize">
                     <property name="suffix">
                      <string> px</string>
@@ -4241,7 +4241,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="12" column="1">
+                  <item row="13" column="1">
                    <widget class="QSpinBox" name="spinBoxHighlightDuration">
                     <property name="specialValueText">
                      <string>Infinite</string>
@@ -4260,7 +4260,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="1">
+                  <item row="5" column="1">
                    <widget class="QSpinBox" name="spinBoxPreviewDPI">
                     <property name="suffix">
                      <string> dpi</string>
@@ -4298,7 +4298,7 @@ them here.</string>
                     </item>
                    </widget>
                   </item>
-                  <item row="12" column="0">
+                  <item row="13" column="0">
                    <widget class="QLabel" name="label_66">
                     <property name="text">
                      <string>Highlight Duration</string>
@@ -4308,7 +4308,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="11" column="1">
+                  <item row="12" column="1">
                    <widget class="QLineEdit" name="lineEditHighlightColor">
                     <property name="toolTip">
                      <string>Specify as hexadecimal RGBA value. Note: The transparency is required because the highlighting is drawn on top of the text due to technical limitations.</string>
@@ -4324,7 +4324,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="5" column="1">
+                  <item row="6" column="1">
                    <widget class="QComboBox" name="comboBoxPreviewMagnifierShape">
                     <item>
                      <property name="text">
@@ -4351,7 +4351,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="11" column="0">
+                  <item row="12" column="0">
                    <widget class="QLabel" name="label_67">
                     <property name="text">
                      <string>Highlight Color</string>
@@ -4361,7 +4361,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="10" column="1">
+                  <item row="11" column="1">
                    <widget class="QLineEdit" name="lineEditPaperColor">
                     <property name="toolTip">
                      <string>Default background color. Specify as hexadecimal RGB value. Note: This will only affect PDFs loaded after the change of the option. The paper color of already open PDFs is not modified.</string>
@@ -4377,14 +4377,14 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="0">
+                  <item row="5" column="0">
                    <widget class="QLabel" name="labelScreenResolution">
                     <property name="text">
                      <string notr="true">&lt;ScreenResolution&gt;</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="7" column="1">
+                  <item row="8" column="1">
                    <layout class="QHBoxLayout" name="HBoxLayout_magnifier">
                     <item>
                      <widget class="QCheckBox" name="checkBoxPreviewMagnifierBorder">
@@ -4415,7 +4415,7 @@ them here.</string>
                     </item>
                    </layout>
                   </item>
-                  <item row="1" column="1">
+                  <item row="2" column="1">
                    <widget class="QComboBox" name="comboBoxPreviewScale">
                     <item>
                      <property name="text">
@@ -4476,7 +4476,7 @@ them here.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="10" column="0">
+                  <item row="11" column="0">
                    <widget class="QLabel" name="label_84">
                     <property name="text">
                      <string>Paper Color</string>
@@ -4502,7 +4502,7 @@ Note: Changing this setting will only affect documents that are opened afterward
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="0">
+                  <item row="9" column="0">
                    <widget class="QLabel" name="label_88">
                     <property name="text">
                      <string>Presentation Laser Pointer Size:</string>
@@ -4516,7 +4516,7 @@ Note: Changing this setting will only affect documents that are opened afterward
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
+                  <item row="3" column="1">
                    <widget class="QCheckBox" name="checkBoxDisableHorizontalScrollingForFitToTextWidth">
                     <property name="text">
                      <string>Disable horizontal scrolling for &quot;Fit to Text Width&quot;</string>
@@ -4526,14 +4526,14 @@ Note: Changing this setting will only affect documents that are opened afterward
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="0">
+                  <item row="2" column="0">
                    <widget class="QLabel" name="label_28">
                     <property name="text">
                      <string>Scale Option:</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="5" column="0">
+                  <item row="6" column="0">
                    <widget class="QLabel" name="label_26">
                     <property name="text">
                      <string>Magnifier Shape:</string>
@@ -4563,7 +4563,7 @@ Note: Changing this setting will only affect documents that are opened afterward
                     </item>
                    </widget>
                   </item>
-                  <item row="6" column="0">
+                  <item row="7" column="0">
                    <widget class="QLabel" name="label_25">
                     <property name="text">
                      <string>Magnifier Size:</string>
@@ -4577,22 +4577,53 @@ Note: Changing this setting will only affect documents that are opened afterward
                     </property>
                    </widget>
                   </item>
-                  <item row="9" column="0">
+                  <item row="10" column="0">
                    <widget class="QLabel" name="label_89">
                     <property name="text">
                      <string>Presentation Laser Pointer Color:</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="8" column="1">
+                  <item row="9" column="1">
                    <widget class="QSpinBox" name="spinBoxPreviewLaserPointerSize">
                     <property name="suffix">
                      <string> px</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="9" column="1">
+                  <item row="10" column="1">
                    <widget class="QLineEdit" name="lineEditLaserPointerColor"/>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelComboPdfViewerLoc">
+                    <property name="text">
+                     <string>Embedded Viewer Location:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="comboBoxViewerLocation">
+                    <item>
+                     <property name="text">
+                      <string>Left</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Right</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Top</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Bottom</string>
+                     </property>
+                    </item>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
