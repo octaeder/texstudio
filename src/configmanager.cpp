@@ -10,7 +10,6 @@
 #include "webpublishdialog_config.h"
 #include "insertgraphics_config.h"
 #include "grammarcheck_config.h"
-#include "PDFDocument.h"
 #include "PDFDocument_config.h"
 #include "terminal_config.h"
 #include "encoding.h"
