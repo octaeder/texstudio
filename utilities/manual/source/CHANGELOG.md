@@ -8,6 +8,7 @@
 - fix "Show all open documents in this tree" [#3476](https://github.com/texstudio-org/texstudio/issues/3476)
 - improved Package Help dialog [#3478](https://github.com/texstudio-org/texstudio/pull/3478)
 - fix handling a new file created from the context menu [#3471](https://github.com/texstudio-org/texstudio/issues/3471)
+- fix pdf viewer window can be restored to maximized window from embedded state or start of txs [#3190](https://github.com/texstudio-org/texstudio/issues/3190)
 
 ## TeXstudio 4.7.2
 
