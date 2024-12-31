@@ -2199,7 +2199,15 @@ int PDFWidget::pageStep()
  */
 int PDFWidget::gridCols(bool fromConfig) const
 {
-    int result= fromConfig ? globalConfig->gridx : gridx;
+    int result;
+    if (!fromConfig)
+        result = gridx;
+    else {
+        if (pdfdocument->embeddedMode)
+            result = gridxEmbedded;
+        else
+            result = globalConfig->gridx;
+    }
     return result;
 }
 /*!
@@ -2209,7 +2217,15 @@ int PDFWidget::gridCols(bool fromConfig) const
  */
 int PDFWidget::gridRows(bool fromConfig) const
 {
-    int result= fromConfig ? globalConfig->gridy : gridy;
+    int result;
+    if (!fromConfig)
+        result = gridy;
+    else {
+        if (pdfdocument->embeddedMode)
+            result = gridyEmbedded;
+        else
+            result = globalConfig->gridy;
+    }
     return result;
 }
 
@@ -2478,8 +2494,11 @@ void PDFWidget::fitWindow(bool checked)
 		PDFScrollArea	*scrollArea = getScrollArea();
 		if (scrollArea && !pages.isEmpty()) {
 			qreal portWidth = scrollArea->viewport()->width() - GridBorder * (gridx - 1);
-            int gy=globalConfig->gridy;
-            if(pdfdocument->embeddedMode) gy=1;
+            int gy;
+            if(pdfdocument->embeddedMode)
+                gy=gridyEmbedded;
+            else
+                gy=globalConfig->gridy;
             qreal portHeight = scrollArea->viewport()->height() - GridBorder * (gy - 1); // use globalConfig->gridy as gridy is automatically increased in continous mode to force rendering of surrounding pages
 			QSizeF	pageSize = maxPageSizeFDpiAdjusted();
             qreal sfh = portWidth / pageSize.width() / gridx;
@@ -2920,7 +2939,7 @@ PDFDocument::~PDFDocument()
 /*!
  * \brief setup ToolBar
  */
-void PDFDocument::setupToolBar(){
+void PDFDocument::setupToolBar(bool embedded){
     toolBar = new QToolBar(this);
     toolBar->setWindowTitle(tr("Toolbar"));
     toolBar->setObjectName(QString("toolBar"));
@@ -2950,7 +2969,18 @@ void PDFDocument::setupToolBar(){
     toolBar->addAction(actionFit_to_Text_Width);
     toolBar->addAction(actionFit_to_Window);
     toolBar->addSeparator();
-	toolBar->addAction(actionAutoHideToolbars);
+    if (embedded) {
+        QToolButton *tbPdfView = new QToolButton(toolBar);
+        actionContinuous->setCheckable(true);
+        actionContinuous->setChecked(true);
+        menuGrid->addAction(actionContinuous);
+        tbPdfView->setMenu(menuGrid);
+        tbPdfView->setPopupMode(QToolButton::MenuButtonPopup);
+        tbPdfView->setText(tr("View"));
+        toolBar->addWidget(tbPdfView);
+        toolBar->addSeparator();
+    }
+    toolBar->addAction(actionAutoHideToolbars);
     toolBar->addAction(actionEnlargeViewer);
     toolBar->addAction(actionShrinkViewer);
     toolBar->addAction(actionToggleEmbedded);
@@ -3148,7 +3178,7 @@ void PDFDocument::init(bool embedded)
     //if (!embedded)
     setupMenus(embedded);
 
-    setupToolBar();
+    setupToolBar(embedded);
 
 
 	setAttribute(Qt::WA_DeleteOnClose, true);
@@ -3370,10 +3400,13 @@ void PDFDocument::init(bool embedded)
 		conf->registerOption("Preview/Continuous", &globalConfig->continuous, true);
         conf->linkOptionToObject(&globalConfig->continuous, actionContinuous, LO_NONE);
 	} else {
-		pdfWidget->setGridSize(1, 1, true);
+		pdfWidget->setGridxEmbedded(1);
+		pdfWidget->setGridyEmbedded(1);
+		pdfWidget->setGridSize(pdfWidget->getGridxEmbedded(), pdfWidget->getGridyEmbedded(), true);
 		pdfWidget->setPageOffset(0, true);
 		pdfWidget->setSinglePageStep(true);
 		scrollArea->setContinuous(true);
+		connect(actionContinuous, SIGNAL(toggled(bool)), scrollArea, SLOT(setContinuous(bool)));
 	}
 
     //connect(actionZoom_In, SIGNAL(triggered()), pdfWidget, SLOT(zoomIn()));
@@ -3806,11 +3839,20 @@ void PDFDocument::setGrid()
 		d.addVariable(&y , "Y-Grid:");
 		if (d.exec()) {
 			pdfWidget->setGridSize(x, y);
-			globalConfig->gridx = x;
-			globalConfig->gridy = y;
+			if (embeddedMode) {
+				pdfWidget->setGridxEmbedded(x);
+				pdfWidget->setGridyEmbedded(y);
+			} else{
+				globalConfig->gridx = x;
+				globalConfig->gridy = y;
+			}
 		}
 		// set grid menu entry checked
-		QString gs=QString("%1x%2").arg(globalConfig->gridx).arg(globalConfig->gridy);
+		QString gs;
+		if (embeddedMode)
+			gs=QString("%1x%2").arg(pdfWidget->getGridxEmbedded()).arg(pdfWidget->getGridyEmbedded());
+		else
+			gs=QString("%1x%2").arg(globalConfig->gridx).arg(globalConfig->gridy);
 		bool found=false;
 		for(QAction *a:actionGroupGrid->actions()){
 			if(a->property("grid").toString()==gs){
@@ -3825,9 +3867,16 @@ void PDFDocument::setGrid()
 		}
 	} else {
 		int p = gs.indexOf("x");
-		globalConfig->gridx = gs.left(p).toInt();
-		globalConfig->gridy = gs.mid(p + 1).toInt();
-		pdfWidget->setGridSize(globalConfig->gridx, globalConfig->gridy);
+		int x = gs.left(p).toInt();
+		int y = gs.mid(p + 1).toInt();
+		pdfWidget->setGridSize(x, y);
+		if (embeddedMode) {
+			pdfWidget->setGridxEmbedded(x);
+			pdfWidget->setGridyEmbedded(y);
+		} else{
+			globalConfig->gridx = x;
+			globalConfig->gridy = y;
+		}
 	}
     pdfWidget->windowResized();
 }

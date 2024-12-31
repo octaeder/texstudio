@@ -232,6 +232,10 @@ public:
 	Q_INVOKABLE void zoom(qreal scale);
 
 	virtual void wheelEvent(QWheelEvent *event);
+	int getGridxEmbedded() {return gridxEmbedded;};
+	int getGridyEmbedded() {return gridyEmbedded;};
+	void setGridxEmbedded(int x) {gridxEmbedded=x;};
+	void setGridyEmbedded(int y) {gridyEmbedded=y;};
 
 protected slots: //not private, so scripts have access
 	void goFirst();
@@ -366,6 +370,7 @@ private:
 	bool		singlePageStep;
 
 	int gridx, gridy, pageOffset;
+	int gridxEmbedded, gridyEmbedded;
 
 	bool forceUpdate;
 
@@ -561,8 +566,8 @@ signals:
 
 private:
 	void init(bool embedded = false);
-    void setupMenus(bool embedded);
-    void setupToolBar();
+	void setupMenus(bool embedded);
+	void setupToolBar(bool embedded);
 	void setCurrentFile(const QString &fileName);
 	void loadSyncData();
 
@@ -675,6 +680,7 @@ private:
 
     QStatusBar *statusbar;
     QToolBar *toolBar;
+    QToolBar *tbPdfView;
     QTimer *toolBarTimer;
 public:
 	QMenu *menuShow;
