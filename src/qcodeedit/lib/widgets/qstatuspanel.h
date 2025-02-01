@@ -43,6 +43,9 @@ class QCE_EXPORT QStatusPanel : public QPanel
 		
 		virtual QString type() const;
 		
+	public slots:
+		void clearZoomInfo();
+
 	protected:
 		virtual void editorChange(QEditor *e);
 		virtual bool paint(QPainter *p, QEditor *e);
@@ -53,6 +56,7 @@ class QCE_EXPORT QStatusPanel : public QPanel
 	private:
 		int m_conflictSpot;
 		QTimer *timer;
+		QTimer *showZoomTimer;
 };
 
 #endif // _QSTATUS_PANEL_H_

@@ -455,6 +455,8 @@ void QEditor::init(bool actions,QDocument *doc)
 	setAttribute(Qt::WA_KeyCompression, true);
 	setAttribute(Qt::WA_InputMethodEnabled, true);
 
+	showZoomTimer = nullptr;
+
 	connect(this							,
             SIGNAL( markChanged(QString,QDocumentLineHandle*,int,bool) ),
 			QLineMarksInfoCenter::instance(),
@@ -5570,6 +5572,7 @@ void QEditor::resetZoom()
 */
 void QEditor::zoom(int n)
 {
+qDebug()<<"zoom n"<<n;
 	if ( !m_doc )
 		return;
 	
@@ -5578,8 +5581,16 @@ void QEditor::zoom(int n)
 	else
 		m_doc->setFontSizeModifier(m_doc->fontSizeModifier() + n);
 
+	zoomInfo = tr("Zoom: %1").arg(m_doc->fontSizeModifier()) + "    " + tr("Size: %1 px").arg(m_doc->font().pointSize());
+
 	if (m_wrapAfterNumChars)
 		setWrapAfterNumChars(m_wrapAfterNumChars); // updates the width for the new font
+}
+
+QString QEditor::getZoomInfo()
+{
+qDebug()<<"getZppmInfo";
+	return zoomInfo;
 }
 
 /*!

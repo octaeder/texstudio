@@ -78,7 +78,7 @@ public:
 
     Q_PROPERTY(QString fileName READ getFileName)
     Q_PROPERTY(QFileInfo fileInfo READ getFileInfo)
-    Q_PROPERTY(LatexEditorView *editorView READ getEditorView)
+//    Q_PROPERTY(LatexEditorView *editorView READ getEditorView)
 
 	bool isHidden(); ///< true if editor is not displayed
 

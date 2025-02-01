@@ -382,6 +382,8 @@ class QCE_EXPORT QEditor : public QAbstractScrollArea
         void removeMark(QString type);
         void removeAllMarks();
         void paintMarks();
+		
+		QString getZoomInfo();
 
 	public slots:
 		void undo();
@@ -659,6 +661,7 @@ public slots:
 		void lineEndingSelected(QAction *a);
 		void lineEndingChanged(int lineEnding);
 		
+		
 	protected:
 		enum SaveState
 		{
@@ -743,6 +746,8 @@ public slots:
 		int m_wrapAfterNumChars;
 
 		QPropertyAnimation *m_scrollAnimation;
+		
+		QString zoomInfo;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(QEditor::State)
