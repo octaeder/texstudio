@@ -2087,9 +2087,9 @@ void ConfigManager::updateRecentFiles(bool alwaysRecreateMenuItems)
 QMenu *ConfigManager::updateListMenu(const QString &menuName, const QStringList &items, const QString &namePrefix, bool prefixNumber, const char *slotName, const int baseShortCut, bool alwaysRecreateMenuItems, int additionalEntries, const QList<QVariant> data)
 {
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-    QSet<QKeyCombination> reservedShortcuts = QSet<QKeyCombination>() << QKeyCombination(QKeySequence(Qt::SHIFT | Qt::Key_F3));  // workaround to prevent overwriting search backward
+    QSet<QKeyCombination> reservedShortcuts = QSet<QKeyCombination>() << QKeyCombination(Qt::SHIFT, Qt::Key_F3);  // workaround to prevent overwriting search backward
 #else
-	QSet<int> reservedShortcuts = QSet<int>() << QKeySequence(Qt::SHIFT + Qt::Key_F3)[0];  // [0] needed for conversion to int // workaround to prevent overwriting search backward
+	QSet<int> reservedShortcuts = QSet<int>() << QKeySequence(Qt::SHIFT | Qt::Key_F3)[0];  // [0] needed for conversion to int // workaround to prevent overwriting search backward
 #endif
 	QMenu *menu = getManagedMenu(menuName);
     REQUIRE_RET(menu, nullptr);
