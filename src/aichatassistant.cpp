@@ -46,7 +46,11 @@ AIChatAssistant::AIChatAssistant(QWidget *parent)
     leEntry->setPlaceholderText(tr("Enter your query here"));
     QAction *actAccept=new QAction(leEntry);
     connect(actAccept, &QAction::triggered,this,&AIChatAssistant::slotSend);
+#if QT_VERSION_MAJOR>5
+    actAccept->setShortcut(QKeySequence(QKeyCombination(Qt::CTRL, Qt::Key_Return)));
+#else
     actAccept->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Return));
+#endif
     leEntry->addAction(actAccept);
     m_actSend=new QAction();
     m_actSend->setIcon(getRealIcon("document-send"));
