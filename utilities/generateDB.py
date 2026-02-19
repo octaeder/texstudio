@@ -4,8 +4,14 @@
 # ported to python for easier maintenance
 
 
+import argparse
 import requests
 import json
+from datetime import datetime
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--ex", action="store_true", help="Include package count and timestamp in the filename.")
+args = parser.parse_args() 
 
 # URLs to fetch JSON data from
 urls = {
@@ -34,7 +40,6 @@ topics_dict = {topic['key']: topic for topic in data["topics"]}
 license_dict = {license['key']: license for license in data["licenses"]}
 
 # Process the packages data
-fileName = f"packageDatabase.json"
 packages = data["packages"]
 package_content = []
 c = 0
@@ -66,6 +71,12 @@ for package in packages:
     package_content.append(package_data)
 
 # Save the processed data to a JSON file
+if args.ex: 
+    timestamp = datetime.now().strftime("%Y-%m-%d-%H.%M.%S")
+    extention = f"-c{c}-{timestamp}"
+else:
+    extention = ""
+fileName = f"packageDatabase{extention}.json"
 print(f"writing {c} packages to file {fileName}...")
 with open(fileName, "w") as file:
     json.dump(package_content, file, indent=2)
