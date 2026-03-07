@@ -10,7 +10,7 @@ LatexRepository *LatexRepository::m_Instance = nullptr;
 LatexRepository::LatexRepository() :
     QObject(nullptr), m_dataSource(None)
 {
-    loadStaticPackageList(":/utilities/packageDatabase.json");
+    loadStaticPackageList("C:/msys64/home/WDAG/texstudio-org/texstudio/utilities/packageDatabase.json");
 }
 
 LatexRepository *LatexRepository::instance()
