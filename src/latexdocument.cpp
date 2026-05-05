@@ -2324,7 +2324,6 @@ void LatexDocuments::deleteAllDocuments()
 
     masterDocument=nullptr;
     currentDocument = nullptr;
-    currentDocument = nullptr;
     hiddenDocuments.clear();
     documents.clear();
 }
