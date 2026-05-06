@@ -480,7 +480,7 @@ int LatexDocument::lexLines(int &lineNr,int &count,bool recheck){
  * \param dlh
  * \return
  */
-void LatexDocument::handleComments(QDocumentLineHandle *dlh, int &curLineNr, std::list<StructureEntry*>::iterator &docStructureIter){
+void LatexDocument::handleComments(QDocumentLineHandle *dlh, int &curLineNr, std::list<StructureEntry*>::iterator &docStructureIter, bool &updateStructure){
     //
     QPair<int,int> commentStart = dlh->getCookieLocked(QDocumentLine::LEXER_COMMENTSTART_COOKIE).value<QPair<int,int> >();
     int col = commentStart.first;
@@ -499,6 +499,7 @@ void LatexDocument::handleComments(QDocumentLineHandle *dlh, int &curLineNr, std
             // save comment type into cookie
             commentStart.second=Token::todoComment;
             dlh->setCookie(QDocumentLine::LEXER_COMMENTSTART_COOKIE, QVariant::fromValue<QPair<int,int> >(commentStart));
+            updateStructure=true;
         }
         //// parameter comment
         if (curLine.startsWith("%&")) {
@@ -1147,7 +1148,7 @@ void LatexDocument::reinterpretCommandArguments(HandledData &changedCommands)
             removeLineElements(dlh,changedCommands);
         }
         // handle special comments (TODO, MAGIC comments)
-        handleComments(dlh,i,docStructureIter);
+        handleComments(dlh,i,docStructureIter,changedCommands.updateStructure);
 
         interpretCommandArguments(dlh,i,changedCommands,false,docStructureIter);
         if(changedCommands.addedLabels.size()>0 || changedCommands.removedLabels.size()>0){
@@ -1488,7 +1489,7 @@ void LatexDocument::patchStructure(int linenr, int count, bool recheck)
         }
 
         // handle special comments (TODO, MAGIC comments)
-        handleComments(dlh,i,docStructureIter);
+        handleComments(dlh,i,docStructureIter,changedCommands.updateStructure);
 
 		// check also in command argument, als references might be put there as well...
 		//// Appendix keyword

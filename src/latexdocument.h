@@ -230,7 +230,7 @@ public:
 
     int lexLines(int &lineNr,int &count,bool recheck=false);
     void lexLinesSimple(const int lineNr,const int count);
-    void handleComments(QDocumentLineHandle *dlh, int &curLineNr, std::list<StructureEntry*>::iterator &docStructureIter);
+    void handleComments(QDocumentLineHandle *dlh, int &curLineNr, std::list<StructureEntry*>::iterator &docStructureIter,bool &updateStructure);
     void removeLineElements(QDocumentLineHandle *dlh, HandledData &changedCommands);
     void handleRescanDocuments(HandledData changedCommands);
     void interpretCommandArguments(QDocumentLineHandle *dlh, const int i, HandledData &data, bool recheckLabels, std::list<StructureEntry*>::iterator &docStructureIter);
