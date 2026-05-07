@@ -100,7 +100,7 @@
     <message>
         <location filename="../src/aichatassistant.cpp" line="591"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Kopyala</translation>
     </message>
     <message>
         <location filename="../src/aichatassistant.cpp" line="396"/>
@@ -1722,22 +1722,22 @@ Ardından aşağıdaki yöntemlerden birini kullanarak yeni bir kısayol atayabi
     <message>
         <location filename="../src/configdialog.ui" line="3226"/>
         <source>Make user constructs from symbols/math commands</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı simgelerden/matematik komutlarından oluşturabilsin</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="3662"/>
         <source>&lt;disable AI&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;disable AI&gt;</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="3682"/>
         <source>Anthropic (Claude)</source>
-        <translation type="unfinished"/>
+        <translation>Anthropic (Claude)</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="3687"/>
         <source>OpenRouter AI</source>
-        <translation type="unfinished"/>
+        <translation>OpenRouter AI</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="3741"/>
@@ -1745,12 +1745,14 @@ Ardından aşağıdaki yöntemlerden birini kullanarak yeni bir kısayol atayabi
 It can ask the program to run those functions during an ai query to retrieve more information on the document.
 This may lead to unwanted data transfer to the AI provider.
 </source>
-        <translation type="unfinished"/>
+        <translation>LLM, TeXstudio üzerinden var olan işlevlerin listesini alır.
+Belge ile ilgili ayrıntılı bilgi almak için programdan bir yapay zeka sorgusu sırasında bu işlevleri çalıştırmasını isteyebilir.
+Bu durum, yapay zeka hizmeti sağlayıcısına istenmeyen verilerin aktarılmasına neden olabilir.</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="3747"/>
         <source>AI may call program functions during query</source>
-        <translation type="unfinished"/>
+        <translation>Yapay zeka, sorgulama sırasında program işlevlerini çağırabilir</translation>
     </message>
     <message>
         <location filename="../src/configdialog.ui" line="5104"/>
@@ -5435,7 +5437,7 @@ Yardımcı komutu desteklemiyor</translation>
     <message>
         <location filename="../src/latexeditorview.cpp" line="653"/>
         <source>Find Definitions</source>
-        <translation type="unfinished"/>
+        <translation>Tanım bul</translation>
     </message>
     <message>
         <location filename="../src/latexeditorview.cpp" line="668"/>
@@ -5707,17 +5709,17 @@ Yardımcı komutu desteklemiyor</translation>
     <message>
         <location filename="../src/latexlogwidget.cpp" line="176"/>
         <source>Log not loaded because of size constraint (%1 MB). User chose not to load it and set it as default option ! [Clear stored answer](%2)</source>
-        <translation type="unfinished"/>
+        <translation>Günlük, boyut kısıtlaması (%1 MB) nedeniyle yüklenemedi. Kullanıcı yüklememeyi ve varsayılan seçenek olarak ayarlamayı seçti! [Kaydedilmiş yanıtı temizle](%2)</translation>
     </message>
     <message>
         <location filename="../src/latexlogwidget.cpp" line="181"/>
         <source>Log file size (%1 MB) above limit; loading performed due to your remembered choice. [Clear stored answer](%2)</source>
-        <translation type="unfinished"/>
+        <translation>Günlük dosyasının boyutu (%1 MB) sınırın üzerinde. Yükleme anımsanan seçeneğinize göre yapıldı. [Kaydedilmiş yanıtı temizle](%2)</translation>
     </message>
     <message>
         <location filename="../src/latexlogwidget.cpp" line="172"/>
         <source>Log not loaded because of size constraint (%1 MB). User chose not to load it !</source>
-        <translation type="unfinished"/>
+        <translation>Günlük, boyut kısıtlaması (%1 MB) nedeniyle yüklenemedi. Kullanıcı yüklememeyi seçti!</translation>
     </message>
 </context>
 <context>
@@ -11921,7 +11923,7 @@ dosyayı kaydetmeniz ya da kapatmanız gerekiyor.</translation>
     <message>
         <location filename="../src/texstudio.cpp" line="3779"/>
         <source>Updating completer</source>
-        <translation type="unfinished"/>
+        <translation>Tamamlayıcı güncelleniyor</translation>
     </message>
     <message>
         <location filename="../src/texstudio.cpp" line="3804"/>
@@ -12053,7 +12055,7 @@ Do you want to continue?</source>
     <message>
         <location filename="../src/texstudio.cpp" line="5764"/>
         <source>AI chat disabled. Please select an AI provider in the settings.</source>
-        <translation type="unfinished"/>
+        <translation>Yapay zeka sohbeti kapalı. Lütfen ayarlar bölümünden bir yapay zeka hizmeti sağlayıcısı seçin.</translation>
     </message>
     <message>
         <location filename="../src/texstudio.cpp" line="5769"/>
@@ -13270,7 +13272,7 @@ included document in %1</source>
         <location filename="../src/usermenudialog.cpp" line="143"/>
         <location filename="../src/usermenudialog.cpp" line="348"/>
         <source>Disable Shortcut and Trigger</source>
-        <translation type="unfinished"/>
+        <translation>Kısayolu ve tetikleyiciyi etkisizleştir</translation>
     </message>
     <message>
         <location filename="../src/usermenudialog.cpp" line="364"/>
