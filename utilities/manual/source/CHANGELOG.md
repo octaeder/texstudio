@@ -1,4 +1,8 @@
 # CHANGELOG
+## TeXstudio 4.9.5
+
+- 
+
 ## TeXstudio 4.9.4
 
 - disable AI wizard by default
