@@ -1780,7 +1780,7 @@ void LatexEditorView::updatePackageFormats()
         QList<QFormatRange> li = dlh->getOverlays(-1);
         QString curLineText = dlh->text();
         TokenList tl = dlh->getCookieLocked(QDocumentLine::LEXER_COOKIE).value<TokenList>();
-        for (const Token &tk : tl) {
+        foreach (const Token &tk , tl) {
             if(tk.type != Token::package && tk.type!=Token::beamertheme && tk.type!=Token::documentclass) continue;
             QString preambel;
             if (tk.type == Token::beamertheme) { // special treatment for  \usetheme
