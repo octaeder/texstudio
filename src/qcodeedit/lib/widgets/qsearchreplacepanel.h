@@ -62,7 +62,7 @@ class QCE_EXPORT QSearchReplacePanel : public QPanel //, private Ui::SearchRepla
 
         void updateIcon();
 
-        void activateWin11Workarround(bool enable);
+        void activateWin11Workaround(bool enable);
 		
 	public slots:
 		void display(int mode, bool replace);

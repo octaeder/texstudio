@@ -1056,7 +1056,7 @@ void QSearchReplacePanel::on_cbSelection_toggled(bool on)
 	if ( m_search ) {
 		m_search->setScope(on ? editor()->cursor() : QDocumentCursor());
 		if(on){
-			// deselect cursor to show search scope (which is below cuersor highlight)
+            // deselect cursor to show search scope (which is below cursor highlight)
 			QDocumentCursor cur=editor()->cursor();
 			if(cur.hasSelection()){
 				cur.clearSelection();
@@ -1265,10 +1265,7 @@ void QSearchReplacePanel::updateIcon()
  * Use red text color instead
  * \param enable
  */
-void QSearchReplacePanel::activateWin11Workarround(bool enable)
-{
-    m_useNoTFoundWorkaround=enable;
-}
+
 /*!
  * \brief check if regular expressions are searched for
  * \return
