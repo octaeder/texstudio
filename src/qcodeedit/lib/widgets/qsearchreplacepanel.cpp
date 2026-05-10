@@ -904,7 +904,7 @@ void QSearchReplacePanel::cFind_textEdited(const QString& text)
 	m_search->setOption(QDocumentSearch::Silent,false);
 
 	if ( m_search->cursor().isNull() )
-        if(m_useNoTFoundWorkaround){
+        if(m_useNotFoundWorkaround){
             cFind->lineEdit()->setStyleSheet("QLineEdit { color : red; }");
         }else{
             cFind->lineEdit()->setStyleSheet("QLineEdit { background: red; color : white; }");
@@ -1258,6 +1258,11 @@ void QSearchReplacePanel::updateIcon()
 	menu->addAction(getRealIconCached("normal-text"),"normal text",this,SLOT(filterChanged()));
 	cbFilter->setMenu(menu);
 	filterChanged();
+}
+
+void QSearchReplacePanel::activateWin11Workaround(bool enable)
+{
+    m_useNotFoundWorkaround=enable;
 }
 
 /*!

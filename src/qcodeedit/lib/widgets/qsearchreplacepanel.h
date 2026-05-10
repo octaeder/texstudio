@@ -157,7 +157,7 @@ class QCE_EXPORT QSearchReplacePanel : public QPanel //, private Ui::SearchRepla
         QLabel *lReplacementText;
 		
 		bool useLineForSearch, searchOnlyInSelection;
-        bool m_useNoTFoundWorkaround=false; // on win11 style, backround red seems not to work Qt6.11
+        bool m_useNotFoundWorkaround=false; // on win11 style, backround red seems not to work Qt6.11
 
         QString currentFilter;
 };
