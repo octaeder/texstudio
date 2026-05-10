@@ -904,7 +904,11 @@ void QSearchReplacePanel::cFind_textEdited(const QString& text)
 	m_search->setOption(QDocumentSearch::Silent,false);
 
 	if ( m_search->cursor().isNull() )
-		cFind->lineEdit()->setStyleSheet("QLineEdit { background: red; color : white; }");
+        if(m_useNoTFoundWorkaround){
+            cFind->lineEdit()->setStyleSheet("QLineEdit { color : red; }");
+        }else{
+            cFind->lineEdit()->setStyleSheet("QLineEdit { background: red; color : white; }");
+        }
 	else if ((m_search->cursor().anchorLineNumber() < cur.anchorLineNumber()) ||
 	         (m_search->cursor().anchorLineNumber() == cur.anchorLineNumber() && m_search->cursor().anchorColumnNumber()<cur.anchorColumnNumber())) {
 		cFind->lineEdit()->setStyleSheet("QLineEdit { background: yellow; color : black; }");
@@ -1254,6 +1258,16 @@ void QSearchReplacePanel::updateIcon()
 	menu->addAction(getRealIconCached("normal-text"),"normal text",this,SLOT(filterChanged()));
 	cbFilter->setMenu(menu);
 	filterChanged();
+}
+
+/*!
+ * \brief win11 style seems to follow qlineedit background = red
+ * Use red text color instead
+ * \param enable
+ */
+void QSearchReplacePanel::activateWin11Workarround(bool enable)
+{
+    m_useNoTFoundWorkaround=enable;
 }
 /*!
  * \brief check if regular expressions are searched for

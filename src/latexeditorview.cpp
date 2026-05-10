@@ -1941,6 +1941,7 @@ void LatexEditorView::updateSettings()
 	editor->setDisplayModifyTime(false);
 	searchReplacePanel->setUseLineForSearch(config->useLineForSearch);
 	searchReplacePanel->setSearchOnlyInSelection(config->searchOnlyInSelection);
+    searchReplacePanel->activateWin11Workarround(config->useWin11Workaround);
     QDocument::WhiteSpaceMode wsMode=config->showWhitespace ? (QDocument::ShowTrailing | QDocument::ShowLeading | QDocument::ShowTabs) : QDocument::ShowNone;
     if(config->showIndentGuides){
         wsMode = wsMode | QDocument::ShowIndentGuides;

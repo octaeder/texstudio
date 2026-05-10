@@ -61,7 +61,8 @@ class QCE_EXPORT QSearchReplacePanel : public QPanel //, private Ui::SearchRepla
         bool getSearchIsWords() const;
 
         void updateIcon();
-		
+
+        void activateWin11Workarround(bool enable);
 		
 	public slots:
 		void display(int mode, bool replace);
@@ -156,6 +157,7 @@ class QCE_EXPORT QSearchReplacePanel : public QPanel //, private Ui::SearchRepla
         QLabel *lReplacementText;
 		
 		bool useLineForSearch, searchOnlyInSelection;
+        bool m_useNoTFoundWorkaround=false; // on win11 style, backround red seems not to work Qt6.11
 
         QString currentFilter;
 };

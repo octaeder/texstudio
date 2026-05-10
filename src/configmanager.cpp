@@ -2931,8 +2931,16 @@ void ConfigManager::setInterfaceStyle()
         if (modernStyle) {
             ManhattanStyle *style = new ManhattanStyle(newStyle);
             if (style->isValid()) QApplication::setStyle(style);
-        } else
+        } else{
             QApplication::setStyle(newStyle);
+#ifdef Q_OS_WIN32
+            if(newStyle=="windows11"){
+                editorConfig->useWin11Workaround=true;
+            }else{
+                editorConfig->useWin11Workaround=false;
+            }
+#endif
+        }
     }
 
 
