@@ -98,7 +98,7 @@ bool CollaborationManager::startHostServer(const QString folder)
             qDebug() << "Collaboration server finished with exit code" << exitCode << "and status" << exitStatus;
             collabServerProcess = nullptr;
         });
-        QStringList args{"share","--directory", folder};
+        QStringList args{"share","--directory", folder, "--username", m_conf->ce_userName};
         collabServerProcess->start(binPath,args);
         if (!collabServerProcess->waitForStarted(1000)) {
             m_errorMessage=collabServerProcess->readAllStandardError();
@@ -128,6 +128,10 @@ bool CollaborationManager::startGuestServer(const QString folder,const QString &
     QString folderName=m_conf->ce_clientPath;
 
     if(!binPath.isEmpty()){
+        // create folderName if it does not exist, along with parent dirs to avoid silent error
+        QDir homeDir = QDir::home();
+        if (!homeDir.exists(folderName))
+            homeDir.mkpath(folderName);
         // run binPath share folder
         collabServerProcess = new QProcess(this);
         collabServerProcess->setProcessChannelMode(QProcess::MergedChannels);
@@ -136,7 +140,7 @@ bool CollaborationManager::startGuestServer(const QString folder,const QString &
             qDebug() << "Collaboration client finished with exit code" << exitCode << "and status" << exitStatus;
             collabServerProcess = nullptr;
         });
-        const QStringList args{"join", code, "--directory", folderName};
+        const QStringList args{"join", code, "--directory", folderName, "--username", m_conf->ce_userName};
         collabServerProcess->start(binPath,args);
         if (!collabServerProcess->waitForStarted(1000)) {
             m_errorMessage=collabServerProcess->errorString();
@@ -374,12 +378,12 @@ void CollaborationManager::readyCollabClientStandardOutput()
             if(method=="cursor"){
                 QJsonObject ja=dd["params"].toObject();
                 // extract uri
-                QString uri=ja["uri"].toString();
+                QUrl uri(ja["uri"].toString());
                 // find doc from uri
-                if(!uri.startsWith("file://")){
+                if(!uri.isLocalFile()){
                     return;
                 }
-                QString fileName=uri.mid(7);
+                QString fileName=uri.path();
                 LatexDocument *doc=findDocumentFromName(fileName);
                 QJsonArray jranges=ja["ranges"].toArray();
                 if(jranges.size()>0){
@@ -401,17 +405,17 @@ void CollaborationManager::readyCollabClientStandardOutput()
             }
             if(method=="edit"){
                 QJsonObject ja=dd["params"].toObject();
-                QString uri=ja["uri"].toString();
+                QUrl uri(ja["uri"].toString());
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
                 qint64 rev_received=ja["revision"].toInteger();
 #else
                 qint64 rev_received=ja["revision"].toInt();
 #endif
                 // find doc from uri
-                if(!uri.startsWith("file://")){
+                if(!uri.isLocalFile()){
                     return;
                 }
-                QString fileName=uri.mid(7);
+                QString fileName=uri.path();
                 LatexDocument *doc=findDocumentFromName(fileName);
                 // update revision number
                 // apparently +1 per received changed request
