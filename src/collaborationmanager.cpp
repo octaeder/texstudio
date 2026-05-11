@@ -138,7 +138,8 @@ bool CollaborationManager::startGuestServer(const QString folder,const QString &
         const QStringList args{"join", code, "--directory", folderName};
         collabServerProcess->start(binPath,args);
         if (!collabServerProcess->waitForStarted(1000)) {
-            m_errorMessage=collabServerProcess->readAllStandardError();
+            m_errorMessage=collabServerProcess->errorString();
+            qDebug()<<m_errorMessage;
             m_startingEthersyncFailed = true;
             collabServerProcess = nullptr;
             return false;
@@ -505,7 +506,7 @@ void CollaborationManager::sendToClient(const QJsonObject &jo)
 {
     QJsonDocument jd(jo);
     QString json=jd.toJson(QJsonDocument::Compact);
-    json.prepend("Content-Length: " + QString::number(json.length()) + "\r\n\r\n");
+    json.prepend("Content-Length: " + QString::number(json.toUtf8().length()) + "\r\n\r\n");
     // send json
     collabClientProcess->write(json.toUtf8());
 }
