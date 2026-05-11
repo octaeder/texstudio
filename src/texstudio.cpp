@@ -7163,11 +7163,15 @@ void Texstudio::updateCollabStatus(const QString errorMessage)
         statusLabelCollab->setPixmap(icon.pixmap(iconSize));
         statusLabelCollab->setToolTip(tr("Collaboration: Connected in folder %1").arg(collabManager->collabClientFolder()));
     }else{
-        QIcon icon = getRealIconCached("network-notconnected");
-        statusLabelCollab->setPixmap(icon.pixmap(iconSize));
         QString msg=tr("Collaboration: Not connected");
         if(!errorMessage.isEmpty()){
             msg+= "\n"+errorMessage;
+            QIcon icon = getRealIconCached("network-disconnect");
+            statusLabelCollab->setPixmap(icon.pixmap(iconSize));
+        }else{
+            // normal not connected icon
+            QIcon icon = getRealIconCached("network-notconnected");
+            statusLabelCollab->setPixmap(icon.pixmap(iconSize));
         }
         statusLabelCollab->setToolTip(msg);
         if(!statusLabelCollab->actions().isEmpty()){
