@@ -546,7 +546,7 @@ protected slots:
     void collabClientFinished(int exitCode, QString m_errorMessage);
     void guestServerSuccessfullyStarted();
     void hostServerSuccessfullyStarted();
-    void updateCollabStatus();
+    void updateCollabStatus(const QString errorMessage="");
     void copyCollabLinkToClipboard();
 
 	bool loadLog();

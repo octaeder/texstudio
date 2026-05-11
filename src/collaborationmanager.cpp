@@ -48,7 +48,7 @@ bool CollaborationManager::startClient(const QString folder)
             return false;
         }
         m_collabClientFolder=folder;
-        emit clientSuccessfullyStarted();
+        emit clientSuccessfullyStarted(QString());
         return true;
     }
     return false;

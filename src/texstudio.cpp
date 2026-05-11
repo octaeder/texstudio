@@ -6931,7 +6931,10 @@ void Texstudio::connectCollabServer()
         if(text.startsWith("teamtype join ")) text=text.mid(14);
         // start server
         const QString folderName=configManager.ce_clientPath;
-        collabManager->startGuestServer(folderName,text);
+        bool started=collabManager->startGuestServer(folderName,text);
+        if(!started){
+            updateCollabStatus(collabManager->readErrorMessage());
+        }
     }
 
 }
@@ -7068,7 +7071,7 @@ void Texstudio::collabClientFinished(int exitCode, QString m_errorMessage)
             qDebug()<<"for now do nothing";
         }
     }
-    updateCollabStatus();
+    updateCollabStatus(m_errorMessage);
 }
 /*!
  * \brief guest server started, now connect client
@@ -7146,7 +7149,7 @@ void Texstudio::hostServerSuccessfullyStarted()
  * \brief update status in panel
  * show running server per icon
  */
-void Texstudio::updateCollabStatus()
+void Texstudio::updateCollabStatus(const QString errorMessage)
 {
     // adapt icon size to dpi
     double dpi=QGuiApplication::primaryScreen()->logicalDotsPerInch();
@@ -7162,7 +7165,11 @@ void Texstudio::updateCollabStatus()
     }else{
         QIcon icon = getRealIconCached("network-notconnected");
         statusLabelCollab->setPixmap(icon.pixmap(iconSize));
-        statusLabelCollab->setToolTip(tr("Collaboration: Not connected"));
+        QString msg=tr("Collaboration: Not connected");
+        if(!errorMessage.isEmpty()){
+            msg+= "\n"+errorMessage;
+        }
+        statusLabelCollab->setToolTip(msg);
         if(!statusLabelCollab->actions().isEmpty()){
             statusLabelCollab->actions().clear();
             statusLabelCollab->setContextMenuPolicy(Qt::NoContextMenu);
