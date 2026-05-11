@@ -3,7 +3,7 @@
 #include <QJsonDocument>
 #include "qdocumentcursor_p.h"
 
-CollaborationManager::CollaborationManager(QObject *parent, ConfigManager *conf,LatexDocuments *docs)
+CollaborationManager::CollaborationManager(QObject *parent, ConfigManager *conf,LatexDocuments *docs):QObject(parent)
 {
     m_conf=conf;
     m_docs=docs;
@@ -107,6 +107,7 @@ bool CollaborationManager::startHostServer(const QString folder)
             return false;
         }
         m_collabServerFolder=folder;
+        return true;
     }
     return false;
 }
