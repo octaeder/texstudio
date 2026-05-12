@@ -3,6 +3,7 @@
 
 - fix crash when setting explicit root doc [#4469](https://github.com/texstudio-org/texstudio/issues/4469)
 - impove handling collaboration with teamtype [#4454](https://github.com/texstudio-org/texstudio/issues/4454),[#4466](https://github.com/texstudio-org/texstudio/issues/4466)
+- workaround win11 style, invisible red background when text not found in searchpanel
 
 ## TeXstudio 4.9.4
 
