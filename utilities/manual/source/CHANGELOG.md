@@ -1,7 +1,8 @@
 # CHANGELOG
 ## TeXstudio 4.9.5
 
-- 
+- fix crash when setting explicit root doc [#4469](https://github.com/texstudio-org/texstudio/issues/4469)
+- impove handling collaboration with teamtype [#4454](https://github.com/texstudio-org/texstudio/issues/4454),[#4466](https://github.com/texstudio-org/texstudio/issues/4466)
 
 ## TeXstudio 4.9.4
 
