@@ -2344,7 +2344,12 @@ void LatexDocuments::setMasterDocument(LatexDocument *document)
 {
 	if (document == masterDocument) return;
     // clear cache
-    document->lp->projectDocuments.clear();
+    if(document){
+        document->lp->projectDocuments.clear();
+    }
+    if(masterDocument){
+        masterDocument->lp->projectDocuments.clear();
+    }
 	if (masterDocument != nullptr && masterDocument->getEditorView() == nullptr) {
         QString fn = masterDocument->getFileName();
 		LatexDocument *doc = masterDocument;
