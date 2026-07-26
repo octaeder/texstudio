@@ -206,6 +206,8 @@ int main(int argc, char **argv)
 #endif
 	// This is a dummy constructor so that the programs loads fast.
 	TexstudioApp a(appId, argc, argv);
+	qputenv("QT_ASSUME_STDERR_HAS_CONSOLE", "1");
+	qDebug()<<"*** Debug ***";
 	bool startAlways = false;
 	QStringList cmdLine = parseArguments(QCoreApplication::arguments(), startAlways);
 
