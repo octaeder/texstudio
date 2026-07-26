@@ -1906,7 +1906,7 @@ void Texstudio::updateCaption()
 		updateOpenDocumentMenu(true);
 		newDocumentLineEnding();
 	}
-	setWindowTitle(title);
+	setWindowTitle(title + QString(" [_packageDB] %1").arg(TEXSTUDIO_GIT_REVISION ? TEXSTUDIO_GIT_REVISION : "n/a"));
 	updateUndoRedoStatus();
 	cursorPositionChanged();
 	if (documents.singleMode()) {
