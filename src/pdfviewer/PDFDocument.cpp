@@ -3994,7 +3994,7 @@ void PDFDocument::idleReload()
 
 void PDFDocument::runExternalViewer()
 {
-	emit runCommand("txs:///view-pdf-external", masterFile, QFileInfo(lastSyncPoint.filename), lastSyncPoint.line);
+    emit runCommandAsync("txs:///view-pdf-external", masterFile, QFileInfo(lastSyncPoint.filename), lastSyncPoint.line);
 }
 
 void PDFDocument::runInternalViewer()

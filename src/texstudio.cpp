@@ -8532,6 +8532,7 @@ QObject *Texstudio::newPdfPreviewer(bool embedded)
     connect(pdfviewerWindow, SIGNAL(syncSource(const QString&,int,bool,QString)), SLOT(syncFromViewer(const QString&,int,bool,QString)));
 	connect(pdfviewerWindow, SIGNAL(focusEditor()), SLOT(focusEditor()));
     connect(pdfviewerWindow, SIGNAL(runCommand(const QString&,const QFileInfo&,const QFileInfo&,int)), &buildManager, SLOT(runCommand(const QString&,const QFileInfo&,const QFileInfo&,int)));
+    connect(pdfviewerWindow, SIGNAL(runCommandAsync(const QString&,const QFileInfo&,const QFileInfo&,int)), &buildManager, SLOT(runCommandAsync(const QString&,const QFileInfo&,const QFileInfo&,int)));
 	connect(pdfviewerWindow, SIGNAL(triggeredClone()), SLOT(newPdfPreviewer()));
 
 	PDFDocument *from = qobject_cast<PDFDocument *>(sender());
